@@ -66,7 +66,13 @@ Gratitud:{gratitud}          💸:{dinero}
     5) Tienda
   
     ''')
-    opc = int(input())
+    opc = input()
+    if opc.isnumeric() == False:
+        print("INGRESA UN NUMERO VALIDO")
+    else:
+        opc = int(opc)
+        if opc >= 5:
+            print("INGRESA UN NUMERO DEL 1-5")
     
     if opc == 1:
         if energia <= 24:
@@ -76,25 +82,28 @@ Gratitud:{gratitud}          💸:{dinero}
         if sueño >= 100:
             print("¡TIENE SUEÑOOOOO💤!")
         else:
+           while True: 
             print("¿Desea Jugar con el POU?")
             print("[si]   [no]")
-            q = input()
+            q = input().lower()
             if q == "si":
                 print("¡Has Jugado con el POU!")
-                dinero=dinero + 25
                 print("- Disminuyo Energia⚡ -")
-                energia = energia - 25
-                print("- Aumento Hambre🍔    -")
+                energia = energia - 15
+                print("- Aumento Hambre🍔, SUEÑO💤 -")
                 hambre = hambre + 25
-                print("- Aumento Sueño     -")
                 sueño = sueño + 50
 
                 print("¡Ha Aumentado la xp!")
                 xp = xp + 5
+                break
 
-            else:
+            if q == "no":
                 print("No jugaste con el POU:(")
                 muerte=muerte+50
+                break
+            else:
+                print("INDICA [si] o [no]")
     if opc == 2:
         print("¿Desea que el POU Duerma?")
         print("[si]    [no]")
@@ -102,7 +111,9 @@ Gratitud:{gratitud}          💸:{dinero}
         if q == "si":
             print("¡El POU ha Dormido!")
             print("- Disminuyo Sueño💤 -")
+            print("- Aumento Energia⚡-")
             sueño = sueño - 50
+            energia = energia + 25
 
             print("¡Ha Aumentado la xp!")
             xp = xp + 2
@@ -170,11 +181,14 @@ Gratitud:{gratitud}          💸:{dinero}
             1) Conserje  +💸
             2) Vendedor  +💸  -⚡
             3) Repartidor ++💸  ---⚡
+            0) Salir
             --------------------------      
             4) $$$$ +++💸 ---💤 -⚡
                 """)
             opc = int(input())
-
+            if opc == 0:
+                print("Volveras pronto...")
+                break 
             if opc == 1:
                 print("Conserje: Tiene Mala Paga pero al menos no te esfuerzas")
                 print("Desea trabajar aqui?")
@@ -191,10 +205,72 @@ Gratitud:{gratitud}          💸:{dinero}
                     print("Bueno... Volveras en otra ocasion")
                     break
 
+            if opc == 2:
+                if energia <= 15:
+                    print("Dudo que puedas trabajar con esa Energia...")
+                else:
+                    print("Vendedor: Trabajo que se Gana Poco mas pero te consumira energia")
+                    print("Desea trabajar aqui?")
+                    print("[Si]  [No]")
+                    qtrabajo = input()
 
+                    if qtrabajo == "si":
+                        print("Perfecto...")
+                        print("Tu paga fue transferida")
+                        print("- ENERGIA ⚡ DISMINUIDA -")
+                        energia = energia - 15
+                        dinero = dinero + 10
+                        break
+                    
+                    else:
+                        print("Bueno... Volveras en otra ocasion")
+                        break
+            if opc == 3:
+                if energia <= 25:
+                    print("Dudo que puedas trabajar con esa Energia...")
+                else:
+                    print("Repartidor: Trabajo que se Gana mucho pero te consumira mucha energia")
+                    print("Desea trabajar aqui?")
+                    print("[Si]  [No]")
+                    qtrabajo = input()
 
+                    if qtrabajo == "si":
+                        print("Perfecto...")
+                        print("Tu paga fue transferida")
+                        print("- ENERGIA ⚡ DISMINUIDA -")
+                        energia = energia - 25
+                        dinero = dinero + 10
+                        break
+                    
+                    else:
+                        print("Bueno... Volveras en otra ocasion")
+                        break
+            if opc == 4:
+                if xp <= 50:
+                    print("Desbloquea este Trabajo con 500XP⭐")
+                if energia <= 25:
+                    print("Dudo que puedas trabajar con esa Energia...")
+                if sueño <= 75:
+                    print("Duerme un poco esto es muy agotador")
+                
+                else: 
+                    print("????: Trabajo de Noche pero te consumira...")
+                    print("Desea trabajar aqui?")
+                    print("[Si]  [No]")
+                    qtrabajo = input()
 
-
+                    if qtrabajo == "si":
+                        print("Perfecto... veo que puedes...")
+                        print("Tu paga fue transferida")
+                        print("- ENERGIA ⚡, SUEÑO 💤 DISMINUIDA -")
+                        energia = energia - 25
+                        sueño = sueño - 75
+                        dinero = dinero + 100
+                        break
+                    
+                    else:
+                        print("Bueno... Volveras en otra ocasion")
+                        break
 
     if opc == 5:
         while True:
