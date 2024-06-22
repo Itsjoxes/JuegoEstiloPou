@@ -1,7 +1,10 @@
-opc = 0
-q = ""
+import json
 
+opc = 0
+q = ""#respuesta
 xp = 0
+datos = []
+datosGuardados = []
 
 #Emociones
 hambre = 0
@@ -17,7 +20,7 @@ stripper = 0
 qtrabajo = ""
 
 #cosas capitalistas
-dinero=0
+dinero=1
 gratitud=0
 muerte=0
 comida=0
@@ -28,6 +31,7 @@ existencia4=0
 existencia5=0
 existencia6=0
 existencia7=0
+resta=0
 
 #Numeros
 hambre = int(hambre)
@@ -64,6 +68,9 @@ Gratitud:{gratitud}          💸:{dinero}
     3) Comer
     4) Trabajar
     5) Tienda
+    ----------
+    9) Configuración
+    0) Salir
   
     ''')
     opc = input()
@@ -71,9 +78,27 @@ Gratitud:{gratitud}          💸:{dinero}
         print("INGRESA UN NUMERO VALIDO")
     else:
         opc = int(opc)
-        if opc >= 5:
-            print("INGRESA UN NUMERO DEL 1-5")
-    
+        if opc == 6:
+            print("INGRESA UN NUMERO DEL 0-5 o 9")
+        if opc == 7:
+            print("INGRESA UN NUMERO DEL 0-5 o 9")
+        if opc == 8:
+            print("INGRESA UN NUMERO DEL 0-5 o 9")
+        if opc >= 10:
+            print("INGRESA UN NUMERO DEL 0-5 o 9")
+    if opc == 0:
+        print("¿Estas Seguro de quieres salir?")
+        print("- Todo Progreso no guardado se PERDERA -")
+        print("[si]   [no]")
+        q = input()
+        if q == "si":
+            print("Adios..")
+            break
+        if q == "no":
+            print(" ")
+        else:
+            print("INDIQUE [si] o [no]")
+
     if opc == 1:
         if energia <= 24:
             print("¡NO TIENE ENERGIAAAA⚡!")
@@ -126,7 +151,19 @@ Gratitud:{gratitud}          💸:{dinero}
         print("[si]    [no]")
         q = input()
         if q == "si":
-            print("¡El POU ha comido!")
+            print(f'''
+                         Existencias
+                  1)Hamburguesa   {existencia1}
+                  2)Papas Fritas  {existencia2}
+                  3)Agua Sin Gas  {existencia3}
+                  4)Agua Con Gas  {existencia4}
+                  5)Coca Cola     {existencia5}
+                  6)Trozo de Pizza{existencia6}''')
+            print("elija una de sus opciones en existencia")
+            opc=int(input("introduzca un numero del 1 al 6: "))
+            if opc==1:
+                print("+30 hp")
+             
             print("- Disminuyo Hambre -")
             hambre = hambre - 25
             
@@ -282,46 +319,145 @@ Gratitud:{gratitud}          💸:{dinero}
                 4)  Agua Con Gas   $5
                 5)  Coca Cola      $15
                 6)  Trozo de Pizza $25
-                7) Personas Transgenero
-                de su mismo genero  $150
-                8) terminar la compra
+                7) terminar la compra
                                     ''')
             opc=int(input("seleccione una opcion"))
             if opc==1:  
                 existencia1=int(input("Cuantas quiere? "))
-                dinero=dinero-existencia1*30
-                if dinero<=-1:
+                resta=dinero-existencia1*30
+                existencia1=existencia1
+                if dinero<existencia1*30:
                     print("necesitas trabajar")
+                    existencia1=0
+                elif dinero>=existencia1*30:
+                    print("se ha concretado su compra")
+
             if opc==2:
                 existencia2=int(input("Cuantas quiere? "))
-                dinero=existencia2*15
-                if dinero<=-1:
+                resta=dinero-existencia2*15
+                existencia2=existencia2
+                if dinero<existencia2*15:
                     print("necesitas trabajar")
+                    existencia2=0
+                elif dinero>=existencia2*15:
+                    print("se ha concretado su compra")
+                    dinero=dinero-existencia2
             if opc==3:
                 existencia3=int(input("Cuantas quiere? "))
-                dinero=existencia3*5
-                if dinero<=-1:
+                resta=dinero-existencia3*5
+                existencia3=existencia3
+                if dinero<existencia3*5:
                     print("necesitas trabajar")
+                    existencia3=0
+                elif dinero>=existencia3*5:
+                    print("se ha concretado su compra")
+                    dinero=dinero-existencia3
             if opc==4:
                 existencia4=int(input("Cuantas quiere? "))
-                dinero=existencia4*5
-                if dinero<=-1:
+                resta=dinero-existencia4*5
+                existencia4=existencia4
+                if dinero<existencia4*5:
                     print("necesitas trabajar")
+                    existencia4=0
+                elif dinero>=existencia4*5:
+                    print("se ha concretado su compra")
+                    dinero=dinero-existencia4
             if opc==5:
                 existencia5=int(input("Cuantas quiere? "))
-                dinero=dinero-existencia5*15
-                if dinero<=-1:
+                resta=dinero-existencia5*15
+                existencia5=existencia5
+                if dinero<existencia5*15:
                     print("necesitas trabajar")
+                    existencia5=0
+                elif dinero>=existencia5*15:
+                    print("se ha concretado su compra")
+                    dinero=dinero-existencia5
             if opc==6:
                 existencia6=int(input("Cuantas quiere? "))
-                dinero=dinero-existencia5*25
-                if dinero<=-1:
+                resta=dinero-existencia5*25
+                existencia6=existencia6
+                if dinero<existencia5*25:
                     print("necesitas trabajar")
-            if opc==7:
-                existencia7=int(input("Cuantas quiere? "))
-                dinero=dinero-existencia5*150
-                if dinero<=-1:
-                    print("necesitas trabajar")
-            if opc==8:
+                    existencia6=0
+                elif dinero>=existencia6*25:
+                    print("se ha concretado su compra")
+                    dinero=dinero-existencia6            
+
+            if opc == 7:
                 break
-        
+    if opc==9:
+        while True:
+            print('''
+            - CONFIGURACION -
+            1) Guardar Datos
+            2) Cargar Datos9
+            3) Mostrar Datos Guardados
+                    ----
+            0) Salir
+            ''')
+            opc = input()
+            if opc.isnumeric() == False:
+                print(" - INGRESA UN NUMERO VALIDO -")
+            else:
+                opc = int(opc)
+                if opc >= 4:
+                    print("INGRESA OPCION DE 1-4")
+
+            if opc == 0:
+                break
+
+            if opc == 1:
+                 print("¿Desea Guardar Datos?")
+                 print("[si] [no]")
+                 q = input().lower()
+                 if q == "si":
+                    print("Datos Guardados")
+                    datos = []
+                    datos.append(hambre)
+                    datos.append(sueño)
+                    datos.append(energia)
+                    datos.append(xp)
+                    datos.append(dinero)
+                    print(datos)
+                    with open('save.json','w') as archivo:
+                        json.dump(datos,archivo)
+                 elif q == "no":
+                    print("Bueno")
+
+                 else:
+                     print("- INGRESA [si] o [no] VALIDO -")
+
+            if opc == 2:
+                print("¿Desea Cargar los Datos")
+                print("[si] [no]")
+                q = input().lower()
+                if q == "si":
+                    try:
+                        with open('save.json', 'r') as archivo:
+                            datos = json.load(archivo)
+                        print("Datos Cargados")
+                        print(datos)
+                        hambre = datos[0]
+                        sueño = datos[1]
+                        energia = datos[2]
+                        xp = datos[3]
+                        dinero = datos[4]
+
+                    except FileNotFoundError:
+                        print("- NO TIENES DATOS GUARDADOS -")
+
+                elif q == "no":
+                    print("Bueno")
+                
+                else:
+                    print("- INGRESA [si] o [no] VALIDO -")
+                    
+            if opc == 3:
+                try:
+                    with open('save.json', 'r') as archivo:
+                        datos = json.load(archivo)
+                    print("Datos Cargados")
+                    print(datos)
+                except FileNotFoundError:
+                    print("- NO TIENES DATOS GUARDADOS -")
+
