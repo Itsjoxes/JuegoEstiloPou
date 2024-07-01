@@ -20,7 +20,7 @@ stripper = 0
 qtrabajo = ""
 
 #cosas capitalistas
-dinero=10000
+dinero=0
 gratitud=0
 muerte=0
 comida=0
